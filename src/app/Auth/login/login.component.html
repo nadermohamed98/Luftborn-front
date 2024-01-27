@@ -1,0 +1,17 @@
+<div class=" d-flex justify-content-center align-items-center vh-100 w-100">
+    <form [formGroup]="LoginForm" class="form">
+        <p class="title">Login </p>
+        <p class="message">Login now and get full access to our app. </p>
+        <label>
+            <input required="" placeholder="" type="email" class="input"formControlName="email">
+            <span>Email</span>
+        </label> 
+            
+        <label>
+            <input required="" placeholder="" type="password" class="input"formControlName="password">
+            <span>Password</span>
+        </label>
+        <button class="submit" (click)="loginSubmition(LoginForm)">Login</button>
+        <p class="signin">You don't have an account ? <a [routerLink]="['/register']" class="fw-bold">Register</a></p>
+    </form>
+</div>

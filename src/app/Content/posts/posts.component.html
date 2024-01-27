@@ -1,0 +1,76 @@
+<div class=" text-end m-4">
+    <button (click)="logOut()" class="btn text-danger">LogOut</button>
+</div>
+<div>
+    <form [formGroup]="AddPostForm" class="border border-3 rounded-5 m-5">
+        <div class="container mt-3">
+            <h4 class="mb-3">{{ isUpdateMode ? 'Update Post' : 'Add New Post' }}</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="Title" formControlName="title">
+                        <label for="floatingInput">Title</label>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a description here" id="floatingTextarea" formControlName="description"></textarea>
+                        <label for="floatingTextarea">Description</label>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-end m-2 container">
+            <button [disabled]="AddPostForm.invalid" class="btn btn-primary"
+        (click)="isUpdateMode ? UpdatePost(postid, AddPostForm) : AddNewPost(AddPostForm)">
+        {{ isUpdateMode ? 'Update' : 'Add' }}
+        </button>
+        </div>
+    </form>
+</div>
+<div class=" d-flex justify-content-center align-items-center vh-50 w-100">
+    <table class="table table-hover container">
+        <thead>
+          <tr>
+            <th scope="col">Post</th>
+            <th colspan="2">Delete</th>
+            <th colspan="2">Upate</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr>
+            <td colspan="2">
+                <h4>Title</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus fugit laudantium natus. Rerum ipsam porro nihil. Velit animi, ac Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, corrupti architecto quam consequuntur natus consectetur, aliquam quasi, cumque minus earum accusamus praesentium nulla enim nemo magni iste aliquid reprehenderit eligendi?</p>
+            </td>
+            <td>
+                <button class="btn btn-outline-danger">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-outline-warning">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+            </td>
+          </tr> -->
+          <tr *ngFor="let post of Posts">
+            <td colspan="2">
+                <h4>{{post.title}}</h4>
+                <p>{{post.description}}</p>
+            </td>
+            <td>
+                <button class="btn btn-outline-danger" (click)="DeletePost(post.id)">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-outline-warning" (click)="getByID(post.id,AddPostForm)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
